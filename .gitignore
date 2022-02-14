@@ -11,4 +11,4 @@ bin.rel/
 build/
 .cmake/
 bin/
-install_cmake.cmake
+cmake_install.cmake
