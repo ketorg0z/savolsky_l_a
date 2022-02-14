@@ -33,5 +33,5 @@ int main() {
 
   cv::imwrite("G_1.png", img);
   cv::imshow("img", img);
-  cv::waitKey(0);
+  //cv::waitKey(0);
 }
