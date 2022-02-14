@@ -8,3 +8,7 @@ _deps
 bin.dbg/
 build.vs.2019/
 bin.rel/
+build/
+.cmake/
+bin/
+install_cmake.cmake

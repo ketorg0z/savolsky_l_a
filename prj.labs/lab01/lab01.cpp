@@ -22,17 +22,16 @@ int main() {
     rc.x += 3;
   }
 
-  //cv::imwrite("I_1.png", img);
-  //cv::imshow("img", img);
-  //cv::waitKey(0);
-
-  cv::Mat img2(60, 768, CV_32FC1);
-  img.convertTo(img, CV_64FC3);
+  cv::imwrite("I_1.png", img);
   cv::imshow("img", img);
   cv::waitKey(0);
-  cv::pow(img, 2.35, img2);
 
-  //cv::imwrite("G_1.png", img2);
-  //cv::imshow("img", img2);
-  //cv::waitKey(0);
+  img.convertTo(img, CV_32FC1, 1.0/255.0);
+  cv::imshow("img", img);
+  cv::waitKey(0);
+  cv::pow(img, 2.35, img);
+
+  cv::imwrite("G_1.png", img);
+  cv::imshow("img", img);
+  cv::waitKey(0);
 }
