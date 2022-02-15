@@ -1,4 +1,5 @@
 #include <opencv2/opencv.hpp>
+#include <iostream>
 
 int main() {
  cv::Mat I_1(60, 768, CV_8UC1);
