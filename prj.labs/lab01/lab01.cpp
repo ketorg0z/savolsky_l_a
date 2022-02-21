@@ -1,7 +1,7 @@
 #include <opencv2/opencv.hpp>
 
 int main() {
- cv::Mat I_1(60, 768, CV_8UC1);
+  cv::Mat I_1(60, 768, CV_8UC1);
 
   cv::Rect2d rc = { 0, 0, 3, 60 };
   for (int i = 0; i < 768; i += 3) {
