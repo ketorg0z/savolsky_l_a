@@ -13,20 +13,47 @@ int main() {
     cv::rectangle(test, rc, { float(i / 3) }, -1);
     rc.x += 3;
   }
+  img.convertTo(img, CV_8UC1, 255);
   test.convertTo(test, CV_32FC1, 1.0 / 255.0);
-  cv::imshow("test1", test);
   for (int i = 0; i < 60; ++i) {
     for (int j = 0; j < 768; ++j) {
       test.at<float>(i, j) = NontrivialFunc(test.at<float>(i, j));
     }
   }
-  img.convertTo(test, CV_32FC1, 1.0 / 255.0);
+//  img.convertTo(img, CV_32FC1, 1.0 / 255.0);
+//  for (int i = 0; i < 256; ++i) {
+//    for (int j = 0; j < 256; ++j) {
+//      img.at<float>(i, j) = NontrivialFunc(img.at<float>(i, j));
+//    }
+//  }
+//  img.convertTo(img, CV_8UC1, 255);
+//  for (int i = 0; i < 256; ++i) {
+//    for (int j = 0; j < 256; ++j) {
+//      std::cout << img.at<uint>(i, j) << std::endl;
+//    }
+//  }
+  cv::Mat LUT(1, 256, CV_8U);
   for (int i = 0; i < 256; ++i) {
-    for (int j = 0; j < 256; ++j) {
-      std::cout << img.at<float>(i, j) << std::endl;
-    }
+    LUT.at<uchar>(i) = i;
+//    std::cout << static_cast<unsigned>(LUT.at<uchar>(i)) << std::endl;
   }
 
+
+  LUT.convertTo(LUT, CV_32F, 1.0/255.0);
+//  for (int i = 0; i < 256; ++i) std::cout << LUT.at<float>(i) << std::endl;
+  for (int i = 0; i < 256; ++i) LUT.at<float>(i) = NontrivialFunc(LUT.at<float>(i));
+//  for (int i = 0; i < 256; ++i) std::cout << LUT.at<float>(i) << std::endl;
+  LUT.convertTo(LUT, CV_8U, 255);
+//  for (int i = 0; i < 256; ++i) {
+//    std::cout << static_cast<unsigned>(LUT.at<uchar>(i)) << std::endl;
+//  }
+  cv::LUT(img, LUT, img);
+    for (int i = 0; i < 256; ++i) {
+      for (int j = 0; j < 256; ++j) {
+        std::cout << img.at<int>(i, j) << std::endl;
+      }
+    }
+  img.convertTo(img, CV_32FC1, 1.0 / 255.0);
   cv::imshow("test", test);
   cv::imshow("img", img);
   cv::waitKey(0);
